@@ -5,7 +5,7 @@ function Sidebar({ topAnime }) {
 		<aside>
 			<nav>
 				<h3>Top Anime</h3>
-				{topAnime.map(anime => (
+				{topAnime && topAnime.map(anime => (
 					<a 
 						href={anime.url} 
 						target="_blank"

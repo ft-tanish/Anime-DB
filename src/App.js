@@ -6,32 +6,34 @@ import MainContent from './components/MainContent';
 function App() {
 	const [animeList, SetAnimeList] = useState([]);
 	const [topAnime, SetTopAnime] = useState([]);
-	const [search, SetSearch] = useState("");
+	
 
 	const GetTopAnime = async () => {
 		const temp = await fetch(`https://api.jikan.moe/v4/top/anime?q=naruto&limit=20`)
-			.then(res => res.json());
-
-		SetTopAnime(temp.top.slice(0, 5));
+			.then(res => res.json())
+		SetTopAnime(temp.data && temp.data.slice(0, 5));
+		
 	}
 
 	const HandleSearch = e => {
 		e.preventDefault();
 
-		FetchAnime(search);
+		FetchAnime();
 	}
 
-	const FetchAnime = async (query) => {
-		const temp = await fetch(`https://api.jikan.moe/v4/search/anime?q=${query}&order_by=title&sort=asc&limit=10`)
-			.then(res => res.json());
+	const FetchAnime = async () => {
+		const temp = await fetch(`https://api.jikan.moe/v4/top/anime?q=naruto&limit=20`)
+			.then(res => res.json())
+			console.log("gggggggggg",temp)
 
-		SetAnimeList(temp.results);
+		SetAnimeList(temp.data);
 	}
 
 	useEffect(() => {
 		GetTopAnime();
+		FetchAnime();
 	}, []);
-	
+	console.log(animeList);
 	return (
 		<div className="App">
 			<Header />
@@ -40,9 +42,8 @@ function App() {
 					topAnime={topAnime} />
 				<MainContent
 					HandleSearch={HandleSearch}
-					search={search}
-					SetSearch={SetSearch}
 					animeList={animeList} />
+					
 			</div>
 		</div>
 	);

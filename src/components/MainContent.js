@@ -1,23 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
+// import { useState, useEffect } from 'react';
 import AnimeCard from './AnimeCard';
 
 function MainContent(props) {
+	const [search, SetSearch] = useState("");
 	return (
 		<main>
 			<div className="main-head">
-				<form 
-					className="search-box"
-					onSubmit={props.HandleSearch}>
+				
 					<input 
 						type="search"
 						placeholder="Search for an anime..."
 						required
-						value={props.search}
-						onChange={e => props.SetSearch(e.target.value)}/>
-				</form>
+						value={search}
+						onChange={e => SetSearch(e.target.value)}/>
+			
 			</div>
 			<div className="anime-list">
-				{props.animeList.map(anime => (
+				{/* {console.log(props.animeList)} */}
+				{props.animeList && 
+				props.animeList.filter((filterData) =>  filterData.title.toLowerCase().includes(search.toLowerCase()) && filterData )
+                .map(anime => (
 					<AnimeCard
 						anime={anime}
 						key={anime.mal_id} />
