@@ -1,9 +1,8 @@
 import React from 'react'
 
-function AnimeCard(props) {
-	 
-	return (
-		<article className="anime-card">
+function WishListCard(props) {
+  return (
+    <article className="anime-card">
 			<a 
 				href={props.anime.url} 
 				target="_blank" 
@@ -16,9 +15,8 @@ function AnimeCard(props) {
 				<h3>{ props.anime.title }</h3>
 				
 			</a>
-			<button onClick={props.Addtowishlist}>Add to wishlist</button>
 		</article>
-	)
+  )
 }
 
-export default AnimeCard
+export default WishListCard

@@ -4,6 +4,12 @@ import AnimeCard from './AnimeCard';
 
 function MainContent(props) {
 	const [search, SetSearch] = useState("");
+	const [wishlist1, setWishlist] = useState( JSON.parse(localStorage.getItem('wishlist')) || []);
+	function Addtowishlist(anime){
+		setWishlist([...wishlist1, anime])
+		localStorage.setItem("wishlist", JSON.stringify(wishlist1)); //store colors
+	}
+	console.log(wishlist1)
 	return (
 		<main>
 			<div className="main-head">
@@ -23,7 +29,9 @@ function MainContent(props) {
                 .map(anime => (
 					<AnimeCard
 						anime={anime}
-						key={anime.mal_id} />
+						key={anime.mal_id} 
+						Addtowishlist = {()=>Addtowishlist(anime)}
+						/>
 				))}
 			</div>
 		</main>
