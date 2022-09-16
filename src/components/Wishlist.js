@@ -13,7 +13,7 @@ const Wishlist = (props) => {
       }
 useEffect(()=>{
     setWishlist(getUniqueItems(wishlist))
-},[])
+},[wishlist])
 
 const myStyle = {
     padding: "30px",
